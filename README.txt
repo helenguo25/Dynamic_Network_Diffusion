@@ -1,5 +1,6 @@
-Last Modified by: Helen Guo
-Date: May 18, 2929
+Last edited by: Helen Guo
+Date: May 18, 2020
+Modified from Brooks, Hohn, et al (2018)
 
 This README file documents the Infection Simulations. It contains two 
 sections:
