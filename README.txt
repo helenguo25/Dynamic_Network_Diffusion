@@ -1,25 +1,20 @@
-Last Modified by: Suzanne S. Sindi
-Date: Sept 8, 2018
+Last Modified by: Helen Guo
+Date: May 18, 2929
 
-This README file documents the Parasite Simulations. It contains two 
+This README file documents the Infection Simulations. It contains two 
 sections:
 
-Section 1: How to Run the Parasite Model
+Section 1: How to Run the Infection Model
 Section 2: Documentation of the Output Files Produced
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Section 1: How to Run the Parasite Model %
+% Section 1: How to Run the Infection Model %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-There are two *M files associated with the parasite model. 
+There are two *M files associated with the infection model. 
 
 - simplifiedDriver.m
-- simplifiedParasiteModel.m
-
-There are several dependencies these codes have and all of them are
-(together with these files) in our shared dropbox:
-
-WAMB2017_Ectoparasites/Papers/SimulationPaper2/MatlabCode
+- simplifiedInfectionModel.m
 
 For simplicity, to run the code you need only change parameters in 
 Part 1 and Part 2 of the "simplifiedDriver.m" script. 
@@ -27,9 +22,7 @@ Part 1 and Part 2 of the "simplifiedDriver.m" script.
 If you take a closer look, you will find you can run any number of combinations
 of parameters, centrality metrics, etc. 
 
-When this script is run, output will automatically be generated in 
-
-WAMB2017_Ectoparasites/Papers/SimulationPaper2/MatlabResults
+When this script is run, output will automatically be generated in the directory
 
 Automatically a prefix will be generated for the simulation(s) which will 
 be of the form:
@@ -47,17 +40,6 @@ an info file:
 
 Network_Static_InjectionSite_Random_Centrality_Closeness__runInfo.txt
 
-This info file will allow you to map the Run number to value for:
-
-%cat Network_Static_InjectionSite_Random_Centrality_Closeness__runInfo.txt
-0001 	 1.010000 	 0.004000 	 1.000000 
-
-0001     = Run Number
-1.010000 = Parasite Reproduction Rate
-0.004000 = Grooming Efficiency
-1.000000 = Spread (should keep this at 1).
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Section 2: Documentation of the Output Files Produced %
@@ -66,15 +48,13 @@ This info file will allow you to map the Run number to value for:
 Here is a short description of each of the different output files:
 
 - adjacency.txt            %Adjacency Matrix
-- actualTransfer.txt       %Actual Parasite Transfer
-- attemptedTransfer.txt    %Attempted Parasite Transfer
 - command.txt              %Exact Matlab Command Ran
 - debug.txt                %Debugging information
-- graph.txt                %Graph Centrality Metrics/Parasite Load
+- graph.txt                %Graph Centrality Metrics/Infection Load
 - nodeBetweenness.txt      %Betweeness Metric for each node
 - nodeCloseness.txt        %Closeness Metric for each node
 - nodeDegree.txt           %Degree Metric for each node
-- nodeParasites.txt        %Parasite Level for each node
+- nodeInfection.txt        %Infection Level for each node
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -94,32 +74,6 @@ N1,N2,N3,N4,N5 = the neighbors of node 1
 M1,M2,M3,M4,M5 = the neighbors of node 2
 etc..
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Actual Transfers of Parasites to Hosts
-Output File: <filePrefix>.actualTransfer.txt
-
-Description: Hosts might gain parasites from their neighbors. But the
-             transfer of parasites is only possible if the host is not
-             fully saturated with parasites. This file records which 
-             hosts *did* receive parasites from neighbors and how much.
-
-Format: Time N1 N2 N3 ...
-    
-Ni > 0 if host i did receive Ni parasites from neighbors.
-             
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Attempted Transfers
-Output File: <filePrefix>attemptedTransfer.txt
-
-Description: This file is the counterpart to the previous file (actual
-             transfers). This file lists the total amount of parasites
-             that were *ATTEMPTED* to be transfered to each host at each
-             time. Note that hosts have a maximum saturation level of
-             parasites. This is why attempted and actual values may differ.
-             
-Format: Time N1 N2 N3 ...
-    
-Ni > 0 if there was an attempt to transver Ni parasites to host i. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
 Command that Generated the output associated with these files.
@@ -147,14 +101,17 @@ Description: Currently this file should be empty. It was created as a
              
              
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Graph Centrality Metrics and Parasite Load
+Graph Centrality Metrics and Infection Load
 Output File: <filePrefix>graph.txt
 
 Description: This file lists (for each time) all the graph level centrality 
-             metrics and the total parasite burden (sum of the parasite
-             load over all loads in the network).
+             metrics and the total infection burden.
              
-Format: Time GRAPH_BETWEENNESS GRAPH_CLOSENESS GRAPH_DEGREE PARASITE_BURDEN
+Format: Time GRAPH_BETWEENNESS GRAPH_CLOSENESS GRAPH_DEGREE NODE_INFECTION
+
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Betweenness Metric for Every Node
@@ -193,10 +150,10 @@ Time = currentIterate
 Di   = betweenness metric for node i.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Parasite Load (Level) for Every Node
-Output File: <filePrefix>nodeParasites.txt
+Infection Load (Level) for Every Node
+Output File: <filePrefix>nodeInfection.txt
 
-Description: This file lists (for each time) the parasite level for
+Description: This file lists (for each time) the infection level for
              each node/host.
              
 Format: Time P1 P2 P3 ...
