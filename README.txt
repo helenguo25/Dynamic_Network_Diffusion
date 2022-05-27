@@ -1,4 +1,4 @@
-Last edited by: Helen Guo
+Last edited by: Helen Guo (advised by Dr. Ami Radunskaya and Maryann Hohn)
 Date: May 18, 2020
 Modified from Brooks, Hohn, et al (2018)
 
